@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export default function Login({ currentLangData, lang, setLang, onLoginSuccess }) {
+export default function Login({ currentLangData, onLoginSuccess }) {
   const [alias, setAlias] = useState('');
 
   const handleSubmit = (e) => {

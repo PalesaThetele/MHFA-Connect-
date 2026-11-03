@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-export default function PeerCounselors({ userAlias = 'babe', onSelectPeer, onStartAiChat }) {
+export default function PeerCounselors({ onSelectPeer, onStartAiChat }) {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
   const [onlineCount, setOnlineCount] = useState(0);

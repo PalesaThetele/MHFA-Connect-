@@ -25,7 +25,7 @@ export default function ProgrammePage() {
         <div className="mx-auto max-w-3xl">
           <h1 className="text-3xl font-bold">Programme not found</h1>
           <p className="mt-3 text-mhfa-muted">
-            We couldn't find the programme you requested.
+            We couldn&apos;t find the programme you requested.
           </p>
           <Link
             to="/"
@@ -52,7 +52,7 @@ export default function ProgrammePage() {
         </p>
 
         <h2 className="mt-10 text-2xl font-bold">
-          What you'll explore
+          What you&apos;ll explore
         </h2>
 
         <ul className="mt-5 space-y-4">
