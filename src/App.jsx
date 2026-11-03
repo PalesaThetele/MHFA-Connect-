@@ -1,14 +1,16 @@
-﻿import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { supabase } from './supabaseClient';
 import ProtectedRoute from './components/ProtectedRoute';
 import MHFAConnectLogo from './components/MHFAConnectLogo';
 import { LanguageProvider, useLanguage } from './LanguageContext';
 import LanguageSwitcher from './components/LanguageSwitcher';
+
 import {
   SELF_HELP_MODULES,
   PEER_COUNSELLORS,
   SUPPORT_DIRECTORY,
 } from './constants';
+
 import { sanitizeText } from './security';
 import Chat from './components/Chat';
 
@@ -18,12 +20,13 @@ import {
   Route,
 } from 'react-router-dom';
 
-import LandingPage from './pages/LandingPage';
-import ProgrammePage from './pages/ProgrammePage';
-import JoinPage from './pages/JoinPage';
-import LoginPage from './pages/LoginPage';
-import ThankYouPage from './pages/ThankYouPage';
-import NotFoundPage from './pages/NotFoundPage';
+// Load standalone pages only when their routes are visited.
+const LandingPage = lazy(() => import('./pages/LandingPage'));
+const ProgrammePage = lazy(() => import('./pages/ProgrammePage'));
+const JoinPage = lazy(() => import('./pages/JoinPage'));
+const LoginPage = lazy(() => import('./pages/LoginPage'));
+const ThankYouPage = lazy(() => import('./pages/ThankYouPage'));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
 /*
  * Additional translations for interface text that was previously
@@ -1018,31 +1021,51 @@ export default function App() {
   return (
     <BrowserRouter>
       <LanguageProvider>
-        <Routes>
-          <Route path="/" element={<LandingPage />} />
+        <Suspense
+          fallback={
+            <main
+              className="flex min-h-screen items-center justify-center bg-mhfa-background"
+              role="status"
+              aria-live="polite"
+            >
+              <div className="text-center">
+                <div
+                  className="mx-auto h-10 w-10 animate-spin rounded-full border-4 border-mhfa-border border-t-mhfa-primary"
+                  aria-hidden="true"
+                />
+                <p className="mt-4 text-sm font-medium text-mhfa-muted">
+                  Loading MHFA Connect...
+                </p>
+              </div>
+            </main>
+          }
+        >
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
 
-          <Route
-            path="/programmes/:programmeId"
-            element={<ProgrammePage />}
-          />
+            <Route
+              path="/programmes/:programmeId"
+              element={<ProgrammePage />}
+            />
 
-          <Route path="/join" element={<JoinPage />} />
+            <Route path="/join" element={<JoinPage />} />
 
-          <Route path="/login" element={<LoginPage />} />
+            <Route path="/login" element={<LoginPage />} />
 
-          <Route path="/thank-you" element={<ThankYouPage />} />
+            <Route path="/thank-you" element={<ThankYouPage />} />
 
-          <Route
-            path="/app/*"
-            element={
-              <ProtectedRoute>
-                <ExistingApp />
-              </ProtectedRoute>
-            }
-          />
+            <Route
+              path="/app/*"
+              element={
+                <ProtectedRoute>
+                  <ExistingApp />
+                </ProtectedRoute>
+              }
+            />
 
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </Suspense>
       </LanguageProvider>
     </BrowserRouter>
   );
