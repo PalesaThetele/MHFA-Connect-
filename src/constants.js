@@ -47,9 +47,7 @@ export const LANGS = {
     pinModalTitle: 'Set Your 4-Digit PIN',
     pinModalSub: 'This will be required to open the app.',
 
-    resourceType: 'PDF Guide',
-    online: 'Online',
-    offline: 'Offline',
+  
     ratingLabel: 'Rating',
 
     modules: {
@@ -150,9 +148,7 @@ export const LANGS = {
     pinModalTitle: 'Beha PIN ea linomoro tse 4',
     pinModalSub: 'PIN ena e tla hlokahala ho bula app.',
 
-    resourceType: 'Tataiso ea PDF',
-    online: 'E Inthaneteng',
-    offline: 'Ha e Inthaneteng',
+    
     ratingLabel: 'Tekanyetso',
 
     modules: {

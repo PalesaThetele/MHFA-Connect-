@@ -60,7 +60,7 @@ const TEXT = {
   },
 };
 
-export default function LoginPage() {
+export default function Login() {
   const navigate = useNavigate();
   const { lang } = useLanguage();
   const t = TEXT[lang] || TEXT.EN;
