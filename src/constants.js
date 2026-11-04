@@ -1,7 +1,7 @@
 
 export const LANGS = {
   EN: {
-    privacy: '100% ANONYMOUS & SECURE',
+    privacy: 'Private Support, Without Judgment',
     h1: 'Mental Health First Aid',
     p: 'Get immediate guidance, access local support resources, or speak with trained peers.',
 
